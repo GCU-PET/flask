@@ -99,7 +99,7 @@ from ultralytics import YOLO
 app = Flask(__name__)
 
 # 학습된 모델 파일의 경로
-best_model_path = "./train7/weights/best.pt"
+best_model_path = "./train8/weights/best.pt"
 
 # 학습된 모델을 로드
 best_model = YOLO(best_model_path)
