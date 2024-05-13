@@ -30,8 +30,10 @@ def upload():
         # 이미지 파일을 업로드 받음
         image_file = request.files["image"]
 
-        # 이미지를 배열로 변환
-        image=cv2.imread(image_file)
+        # 이미지 데이터를 읽어와서 배열로 변환
+        image_data = image_file.read()
+        nparr = np.frombuffer(image_data, np.uint8)
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         # 이미지를 객체로 탐지
         detections = detect_objects(image, best_model)
@@ -48,4 +50,3 @@ def upload():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
-
