@@ -3,9 +3,11 @@ import numpy as np
 import cv2
 import json
 from ultralytics import YOLO
+from flask_cors import CORS
 
 # Flask 앱 생성
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # 학습된 모델 파일의 경로
 best_model_path = "./train8/weights/best.pt"
@@ -24,10 +26,11 @@ def detect_objects(image, model):
 
 
 # 이미지를 업로드하는 엔드포인트
-@app.route("/upload", methods=["POST"])
+@app.route("/fast/upload", methods=["POST"])
 def upload():
     try:
         # 이미지 파일을 업로드 받음
+        print(request)
         image_file = request.files["image"]
 
         # 이미지 데이터를 읽어와서 배열로 변환
